@@ -1,0 +1,30 @@
+
+<a class="button" routerLink="/addcontacts">Add Contacts</a>|
+<h2>Contact List</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contact of contacts">
+      <td>{{ contact.id }}</td>
+      <td>{{ contact.firstName }}</td>
+      <td>{{ contact.lastName }}</td>
+      <td>{{ contact.email }}</td>
+      <td>{{ contact.phone }}</td>
+      <td>
+        <a [routerLink]="['/contacts', contact.id]">View</a>&nbsp;
+        <a [routerLink]="['/contacts/edit', contact.id]">Edit</a>&nbsp;
+        <button (click)="deleteContact(contact.id)">Delete</button>&nbsp;
+      </td>
+    </tr>
+  </tbody>
+</table>
+

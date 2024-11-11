@@ -1,0 +1,25 @@
+<h2>Edit Contact</h2>
+<form *ngIf="contact" (ngSubmit)="updateContact()">
+  <label>
+    FirstName:
+    <input [(ngModel)]="contact.firstName" name="firstName" >
+  </label>
+  <br>
+  <label>
+    LastName:
+    <input [(ngModel)]="contact.lastName" name="lastName" >
+  </label>
+  <br>
+  <label>
+    Email:
+    <input [(ngModel)]="contact.email" name="email" type="email" >
+  </label>
+  <br>
+  <label>
+    Phone:
+    <input [(ngModel)]="contact.phone" name="phone" >
+  </label>
+  <br>
+  <button type="submit">Update Contact</button>
+</form>
+<a routerLink="/contacts">Back to List</a>

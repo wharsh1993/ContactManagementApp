@@ -1,0 +1,25 @@
+<h2>Add New Contact</h2>
+<form (ngSubmit)="addContact()">
+  <label>
+    FirstName:
+    <input [(ngModel)]="contact.firstName" name="firstName" required>
+  </label>
+  <br>
+  <label>
+    LastName:
+    <input [(ngModel)]="contact.lastName" name="lastName" required>
+  </label>
+  <br>
+  <label>
+    Email:
+    <input [(ngModel)]="contact.email" name="email" type="email" required>
+  </label>
+  <br>
+  <label>
+    Phone:
+    <input [(ngModel)]="contact.phone" name="phone" required>
+  </label>
+  <br>
+  <button type="submit">Add Contact</button>
+</form>
+<a routerLink="/contacts">Back to List</a>
