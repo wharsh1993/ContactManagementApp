@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactService } from '../contact.service';
 import { Contact } from '../contact';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
@@ -10,20 +10,31 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   selector: 'app-contact-edit',
   templateUrl: './contact-edit.component.html',
   styleUrls: ['./contact-edit.component.css'],
-  imports: [FormsModule,CommonModule,RouterLink,RouterOutlet],
-  standalone:true
+  imports: [FormsModule,CommonModule,RouterLink,RouterOutlet,ReactiveFormsModule],
+    standalone:true
 })
 export class ContactEditComponent implements OnInit {
   contact: Contact = new Contact;
+  contactForm!: FormGroup; 
 
   constructor(
     private route: ActivatedRoute,
     private contactService: ContactService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.getContact();
+      const contact: Contact = { id: 1, firstName: 'John', lastName: 'Doe',email:'alice.johnson@example.com',
+         phone: '1234567890' };
+
+    this.contactForm = this.fb.group({ id: [null], 
+      firstName: ['', Validators.required],
+       lastName: ['', Validators.required], 
+       email: ['', [Validators.required, Validators.email]],
+       phone: ['', [Validators.required, Validators.pattern('^[0-9]+$'),Validators.maxLength(10),Validators.minLength(10)]] });
+       this.contactForm.patchValue(contact); 
   }
 
   getContact(): void {

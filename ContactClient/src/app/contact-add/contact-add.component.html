@@ -1,25 +1,40 @@
-<h2>Add New Contact</h2>
-<form (ngSubmit)="addContact()">
-  <label>
-    FirstName:
-    <input [(ngModel)]="contact.firstName" name="firstName" required>
-  </label>
-  <br>
-  <label>
-    LastName:
-    <input [(ngModel)]="contact.lastName" name="lastName" required>
-  </label>
-  <br>
-  <label>
-    Email:
-    <input [(ngModel)]="contact.email" name="email" type="email" required>
-  </label>
-  <br>
-  <label>
-    Phone:
-    <input [(ngModel)]="contact.phone" name="phone" required>
-  </label>
-  <br>
-  <button type="submit">Add Contact</button>
-</form>
-<a routerLink="/contacts">Back to List</a>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">Add New Contact</div>
+    <div class="card-body">
+      <form [formGroup]="contactForm" (ngSubmit)="addContact()">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          <div *ngIf="contactForm.get('firstName')?.touched && contactForm.get('firstName')?.invalid" class="text-danger">
+            First Name is required
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName">
+          <div *ngIf="contactForm.get('lastName')?.touched && contactForm.get('lastName')?.invalid" class="text-danger">
+            Last Name is required
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="email">
+          <div *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid" class="text-danger">
+            Valid Email is required
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input type="phone" id="phone" class="form-control" formControlName="phone">
+          <div *ngIf="contactForm.get('phone')?.touched && contactForm.get('phone')?.invalid" class="text-danger">
+            Valid Phone No is required
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid">Add Contact</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
